@@ -2,12 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .routes import audio, auth, execute, history, interpret
+from .utils.config import get_settings
+
+settings = get_settings()
 
 app = FastAPI(title="AI Voice-Controlled Terminal")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

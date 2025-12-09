@@ -18,7 +18,7 @@ def client() -> TestClient:
 def get_auth_header(client: TestClient) -> dict:
     response = client.post(
         "/auth/login",
-        data={"username": "admin", "password": "password123"},
+        data={"username": "admin", "password": "Str0ngP@ssw0rd!"},
         headers={"Content-Type": "application/x-www-form-urlencoded"},
     )
     assert response.status_code == 200
