@@ -1,0 +1,17 @@
+[
+  {
+    "intent": "system_status",
+    "description": "Report overall system health",
+    "allowed_slots": []
+  },
+  {
+    "intent": "list_logs",
+    "description": "List log files in allowed directories",
+    "allowed_slots": ["path"]
+  },
+  {
+    "intent": "show_history",
+    "description": "Show previous commands executed by user",
+    "allowed_slots": []
+  }
+]

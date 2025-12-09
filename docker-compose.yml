@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - JWT_SECRET=${JWT_SECRET:-changeme}
+      - WHISPER_MODE=${WHISPER_MODE:-api}
+      - MONGO_URI=${MONGO_URI:-}
+      - USE_MONGO=${USE_MONGO:-false}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./.env:/app/backend/.env:ro
+
+  textual_ui:
+    build:
+      context: .
+      dockerfile: textual_ui/Dockerfile
+    environment:
+      - API_BASE_URL=http://backend:8000
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+
+  mongo:
+    image: mongo:7
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=voice_terminal

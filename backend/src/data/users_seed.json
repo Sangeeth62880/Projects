@@ -1,0 +1,9 @@
+[
+  {
+    "id": "1",
+    "username": "admin",
+    "password": "password123",
+    "full_name": "Admin User",
+    "disabled": false
+  }
+]
