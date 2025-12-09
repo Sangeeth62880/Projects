@@ -11,7 +11,7 @@ class SandboxExecutor:
 
     def _is_path_allowed(self, target: Path) -> bool:
         resolved = target.resolve()
-        return any(str(resolved).startswith(str(base)) for base in self.allowed_paths)
+        return any(resolved.is_relative_to(base) for base in self.allowed_paths)
 
     def _list_files(self, path_value: str) -> Dict[str, Any]:
         target = Path(path_value)

@@ -18,7 +18,7 @@ class SettingsView(Static):
         password = self.query_one("#password", Input).value.strip()
         log = self.query_one("#settings-log", Log)
         if base_url:
-            self.app.api_client.set_base_url(base_url)
+            await self.app.api_client.set_base_url(base_url)
         try:
             result = await self.app.api_client.login(username, password)
             log.write_line(f"Logged in as {result['user']['username']}")

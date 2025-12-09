@@ -43,8 +43,12 @@ class UserStore:
                     if not hashed_password:
                         logger.warning("User entry missing password fields: %s", raw)
                         continue
+                    user_id = raw.get("id")
+                    if user_id is None:
+                        logger.warning("User entry missing id: %s", raw)
+                        continue
                     user = User(
-                        id=str(raw.get("id")),
+                        id=str(user_id),
                         username=raw["username"],
                         hashed_password=hashed_password,
                         full_name=raw.get("full_name"),

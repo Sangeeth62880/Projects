@@ -7,7 +7,9 @@ class APIClient:
         self.token: str | None = None
         self._client = httpx.AsyncClient(base_url=self.base_url)
 
-    def set_base_url(self, base_url: str) -> None:
+    async def set_base_url(self, base_url: str) -> None:
+        if not self._client.is_closed:
+            await self._client.aclose()
         self.base_url = base_url.rstrip("/")
         self._client = httpx.AsyncClient(base_url=self.base_url)
 
